@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 // const http = require('http')
 // displays all methods
 // console.log(http.METHODS)
+// console.log(http.STATUS_CODES)
 
 const exerciseRouter = require("./routes/exercises");
 const userRouter = require("./routes/users");
@@ -15,6 +16,7 @@ require("dotenv").config();
 const app = express();
 const port = process.env.PORT || 5000;
 app.use(cors());
+// parses the body of requests (req.body) into json because often body data may be encoded or binary etc
 app.use(express.json());
 
 // connect to mongoAtlas DB using the connection string which we get from mongoAtlas site
