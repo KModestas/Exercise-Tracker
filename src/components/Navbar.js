@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default () => (
   <nav className="navbar navbar-dark bg-dark navbar-expand-lg">
     <Link to="/" className="navbar-brand">
-      ExcerTracker
+      Exercise Tracker
     </Link>
     <div className="collpase navbar-collapse">
       <ul className="navbar-nav mr-auto">
