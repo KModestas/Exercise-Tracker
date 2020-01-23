@@ -17,6 +17,6 @@ const exerciseSchema = new Schema(
 );
 
 // create a mongoose model, wrapping the schema and providing an interface to the db for creating, querying, updating, deleting records
-const Excerise = mongoose.model("Excerise", exerciseSchema);
+const Exercise = mongoose.model("Excerise", exerciseSchema);
 
-module.exports = Excerise;
+module.exports = Exercise;
