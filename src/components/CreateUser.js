@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import axios from "axios";
 
 export default () => {
-  const [username, setUsername] = useState({
-    username: ""
-  });
+  const [username, setUsername] = useState("");
 
   const onSubmit = e => {
     e.preventDefault();
 
-    // axios.post('http://localhost:5000/users/add', userName)
-    //   .then(res => console.log(res.data));
+    // send json username object to backend
+    axios
+      .post("http://localhost:5000/users/add", { username })
+      .then(res => console.log(res.data));
 
     setUsername("");
   };

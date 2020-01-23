@@ -1,22 +1,34 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { withRouter } from "react-router-dom";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 
-export default () => {
+const CreateExercise = props => {
   const [state, setState] = useState({
     username: "",
     description: "",
     duration: 0,
     date: new Date(),
-    users: [
-      {
-        username: "test",
-        description: "desc",
-        date: ""
-      }
-    ]
+    users: []
   });
+
+  // remember we specificed 5000 as the port in the backend
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/users/")
+      .then(res => {
+        if (res.data.length) {
+          setState({
+            ...state,
+            users: res.data.map(user => user.username),
+            username: res.data[0].username
+          });
+        }
+      })
+      .catch(error => console.log(error));
+  }, []);
 
   const onChangeUsername = e => {
     setState({
@@ -56,35 +68,28 @@ export default () => {
       date: state.date
     };
 
-    //     axios
-    //   .post("http://localhost:5000/exercises/add", exercise)
-    //   .then(res => console.log(res.data));
-
-    // redirect to /
-
-    console.log(exercise);
+    axios
+      .post("http://localhost:5000/exercises/add", exercise)
+      .then(res => console.log(res.data), props.history.push("/"));
   };
 
   return (
     <div>
-      <h3>Create New Exercise Log</h3>
+      <h3>Create New Exercise</h3>
       <form onSubmit={onSubmit}>
         <div className="form-group">
           <label>Username: </label>
           <select
-            // ref="userInput"
             required
             className="form-control"
             value={state.username}
             onChange={onChangeUsername}
           >
-            {state.users.map(function(user) {
-              return (
-                <option key={user} value={user}>
-                  {user}
-                </option>
-              );
-            })}
+            {state.users.map(user => (
+              <option key={user} value={user}>
+                {user}
+              </option>
+            ))}
           </select>
         </div>
         <div className="form-group">
@@ -116,7 +121,7 @@ export default () => {
         <div className="form-group">
           <input
             type="submit"
-            value="Create Exercise Log"
+            value="Create Exercise"
             className="btn btn-primary"
           />
         </div>
@@ -124,3 +129,5 @@ export default () => {
     </div>
   );
 };
+
+export default withRouter(CreateExercise);
