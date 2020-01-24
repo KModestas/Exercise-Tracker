@@ -28,7 +28,6 @@ router.route("/add").post((req, res) => {
 
 // get the id from the url and use it to find exercise in db and return it as json
 router.route("/:id").get((req, res) => {
-  console.log("HELLO ? ", req.params.id);
   Exercise.findById(req.params.id)
     .then(exercise => res.json(exercise))
     .catch(err => res.status(400).json("Error :" + err));
