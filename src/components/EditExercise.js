@@ -14,24 +14,22 @@ export default props => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/users/" + props.match.params.id)
+      .get("http://localhost:5000/exercises/" + props.match.params.id)
       .then(res => {
-        if (res.data.length) {
-          setState({
-            ...state,
-            username: res.data.username,
-            description: res.data.description,
-            duration: res.data.duration,
-            date: new Date(res.data.date)
-          });
-        }
+        setState({
+          ...state,
+          username: res.data.username,
+          description: res.data.description,
+          duration: res.data.duration,
+          date: new Date(res.data.date)
+        });
       })
       .catch(error => console.log(error));
 
     axios
       .get("http://localhost:5000/users/")
       .then(res => {
-        if (res.data.length) {
+        if (res.data.length > 0) {
           setState({
             ...state,
             users: res.data.map(user => user.username)
