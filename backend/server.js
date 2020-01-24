@@ -11,6 +11,7 @@ const mongoose = require("mongoose");
 const exerciseRouter = require("./routes/exercises");
 const userRouter = require("./routes/users");
 
+// loads environment variables from a .env file into process.env.
 require("dotenv").config();
 
 const app = express();
