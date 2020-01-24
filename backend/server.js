@@ -16,6 +16,7 @@ require("dotenv").config();
 
 const app = express();
 const port = process.env.PORT || 5000;
+// app.use middle ware allows you to specify a function that will run before every request
 app.use(cors());
 // parses the body of requests (req.body) into json because often body data may be encoded or binary etc
 app.use(express.json());
